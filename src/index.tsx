@@ -12,6 +12,7 @@ import ErrorPage from './app/routers/error-page';
 import HomePage from './app/routers/home';
 import PostPage from './app/routers/post';
 import axios from 'axios';
+import { HelmetProvider  } from 'react-helmet-async';
 
 const container = document.getElementById('root')!;
 const root = createRoot(container);
@@ -39,7 +40,9 @@ const router = createBrowserRouter([
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <RouterProvider router={router} />
+      <HelmetProvider>
+        <RouterProvider router={router} />
+      </HelmetProvider>
     </Provider>
   </React.StrictMode>
 );

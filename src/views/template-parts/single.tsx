@@ -4,9 +4,7 @@ import CommentComponentTemplate from "../components/comments";
 
 const SingleTemplate = (props: SingleProps) => {
     const { post } = props;
-    console.log(post);
     
-
     return (
         <>
             <div className="container-fluid">

@@ -7,6 +7,6 @@ export function fetchPost(type: string, slug: string) {
 }
 
 export function fetchPosts(type: string, options?: Array<PosterOptions>) {
-  const response = axios.get(`post-type/${type}`);
+  const response = axios.get(`post-type/${type}`, { params: options });
   return response;
 }

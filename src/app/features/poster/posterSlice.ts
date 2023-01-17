@@ -67,7 +67,7 @@ export const posterSlice = createSlice({
       .addCase(getPostBySlug.fulfilled, (state, action) => {
         state.status = 'succeeded';
         // Add any fetched posts to the array
-        state.posts = action.payload;
+        state.post = action.payload.data;
       })
   }
 });

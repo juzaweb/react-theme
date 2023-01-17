@@ -1,10 +1,10 @@
 import { IndexProps } from "../app/context/Props";
 import { Link } from "react-router-dom";
 import { upload_url, __ } from "../app/context/Helper";
+import React from "react";
 
 const IndexTemplate = (props: IndexProps) => {
     const { posts } = props;
-    
     
     return (
       <>
@@ -41,8 +41,8 @@ const IndexTemplate = (props: IndexProps) => {
             <hr className="featurette-divider" />
 
             {posts?.data?.map((item, index) => (
-              <>
-                <div key={item.id} className="row featurette">
+              <React.Fragment key={item.id}>
+                <div className="row featurette">
                   <div className={"col-md-7" + (index % 2 != 0 ? ' order-md-2': '')}>
                     <h2 className="featurette-heading">
                       <Link to={item.url}>{item.title}</Link>
@@ -55,7 +55,7 @@ const IndexTemplate = (props: IndexProps) => {
                   </div>
                 </div>
                 <hr className="featurette-divider" />
-              </>
+              </React.Fragment>
             ))}
 
           </div>
