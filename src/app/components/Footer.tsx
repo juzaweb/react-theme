@@ -1,6 +1,5 @@
-//import TemplateFooter from "../../templates/footer";
+import TemplateFooter from "../../views/footer";
 
 export default function Header() {
-    return <></>
-    //return <TemplateFooter />;
+    return <TemplateFooter />;
 }

@@ -1,7 +1,9 @@
 import { Post, Comment } from "./PostContext"
 
 export interface IndexProps {
-    posts: Array<Post>
+    posts: {
+        data?: Array<Post>
+    }
     isLoading: boolean
 }
 

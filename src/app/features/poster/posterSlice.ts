@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { fetchPost, fetchPosts } from './posterAPI';
-import axios from 'axios';
+import { RootState } from '../../store';
+import { DefaultPost, Post } from '../../context/PostContext';
 
 export interface PosterOptions {
   key: string;
@@ -8,13 +9,17 @@ export interface PosterOptions {
 }
 
 export interface PosterState {
-  posts: Array<{any: any}>;
+  posts: {
+    data?: Array<Post>
+  };
+  post: Post;
   status: string;
-  error?: string
+  error?: string;
 }
 
 const initialState: PosterState = {
-  posts: [],
+  posts: {},
+  post: DefaultPost,
   status: 'idle',
 };
 
@@ -59,17 +64,16 @@ export const posterSlice = createSlice({
         state.status = 'failed'
         state.error = action.error.message
       })
+      .addCase(getPostBySlug.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        // Add any fetched posts to the array
+        state.posts = action.payload;
+      })
   }
 });
 
-//export const { increment, decrement, incrementByAmount } = posterSlice.actions;
+export const selectAllPosts = (state: RootState) => state.poster.posts
 
-// The function below is called a selector and allows us to select a value from
-// the state. Selectors can also be defined inline where they're used instead of
-// in the slice file. For example: `useSelector((state: RootState) => state.poster.value)`
-//export const selectCount = (state: RootState) => state.poster.value;
-
-
-export const selectAllPosts = (state: PosterState) => state.posts
+export const selectPost = (state: RootState) => state.poster.post
 
 export default posterSlice.reducer;

@@ -11,9 +11,12 @@ import './index.css';
 import ErrorPage from './app/routers/error-page';
 import HomePage from './app/routers/home';
 import PostPage from './app/routers/post';
+import axios from 'axios';
 
 const container = document.getElementById('root')!;
 const root = createRoot(container);
+
+axios.defaults.baseURL = "http://cms.local/api";
 
 const router = createBrowserRouter([
   {

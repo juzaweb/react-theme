@@ -1,8 +1,7 @@
-import { NextPage } from "next";
-import { __ } from "../../context/Helper";
-import { CommentProps } from "../../context/Props";
+import { __ } from "../../app/context/Helper";
+import { CommentProps } from "../../app/context/Props";
 
-const CommentComponentTemplate: NextPage<CommentProps> = (props) => {
+const CommentComponentTemplate = (props: CommentProps) => {
     const { total, comments } = props;
     if (!props.support) {
         return <></>;

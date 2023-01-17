@@ -1,10 +1,11 @@
-import { NextPage } from "next";
-import { upload_url } from "../../context/Helper";
-import { SingleProps } from "../../context/Props";
+import { upload_url } from "../../app/context/Helper";
+import { SingleProps } from "../../app/context/Props";
 import CommentComponentTemplate from "../components/comments";
 
-const SingleTemplate: NextPage<SingleProps> = (props) => {
+const SingleTemplate = (props: SingleProps) => {
     const { post } = props;
+    console.log(post);
+    
 
     return (
         <>

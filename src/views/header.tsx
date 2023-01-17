@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "react-router-dom";
 
 const TemplateHeader = () => {
     return (
@@ -6,7 +6,7 @@ const TemplateHeader = () => {
         <header>
             <nav className="navbar navbar-expand-md navbar-dark bg-dark">
                 <div className="container-fluid">
-                <Link className="navbar-brand" href={'/'}>Juzaweb</Link>
+                <Link className="navbar-brand" to={'/'}>Juzaweb</Link>
 
                 <button 
                     className="navbar-toggler" 

@@ -1,5 +1,7 @@
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
+import IndexTemplate from "../../views";
+import Layout from "../components/Layout";
 import { getPosts, selectAllPosts } from "../features/poster/posterSlice";
 import { useAppDispatch } from "../hooks";
 
@@ -12,11 +14,7 @@ export default function HomePage() {
     dispatch(getPosts({type: 'posts'}));
   }, [dispatch])
 
-  console.log(posts);
-
-  return (
-    <div id="error-page">
-      
-    </div>
-  );
+  return <Layout>
+    <IndexTemplate posts={posts} />
+  </Layout>;
 }
