@@ -28,18 +28,13 @@ const SingleTemplate = (props: SingleProps) => {
                     </div>
                 </div>
 
-                {(props.config?.comment_support) ? (
+                {/* {(props.config?.supports) ? (
                     <div className="row mt-5">
                         <div className="col-md-12">
-                            <CommentComponentTemplate 
-                                total={post.total_comment} 
-                                support={props.config?.comment_support} 
-                                comments={props.comments} 
-                                isLoading={props.isCommentLoading}
-                            />
+                            <CommentComponentTemplate/>
                         </div>
                     </div>
-                ) : ''}
+                ) : ''} */}
                 
             </div>
         </>

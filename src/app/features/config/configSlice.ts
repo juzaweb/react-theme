@@ -7,12 +7,21 @@ export interface ConfigOptions {
   value?: any;
 }
 
+export interface PostType {
+  label: string;
+  key: string;
+  singular: string;
+  supports?: Array<string>;
+  description?: string;
+}
+
 export interface ConfigState {
   config: {
     general: {
       title?: string;
       description?: string;
-    }
+    },
+    post_types?: Array<{[key: string]: PostType}>
   };
   status: string;
   error?: string;

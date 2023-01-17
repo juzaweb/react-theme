@@ -12,14 +12,13 @@ export interface PosterState {
   posts: {
     data?: Array<Post>
   };
-  post: Post;
+  post?: Post;
   status: string;
   error?: string;
 }
 
 const initialState: PosterState = {
   posts: {},
-  post: DefaultPost,
   status: 'idle',
 };
 
@@ -27,7 +26,6 @@ export const getPostBySlug = createAsyncThunk(
   'poster/fetchPost',
   async ({type, slug}: {type: string, slug: string}) => {
     const response = await fetchPost(type, slug);
-    // The value we return becomes the `fulfilled` action payload
     return response.data;
   }
 );
@@ -36,7 +34,6 @@ export const getPosts = createAsyncThunk(
   'poster/fetchPosts',
   async ({type, options}: {type: string, options?: Array<PosterOptions>}) => {
     const response = await fetchPosts(type, options);
-    // The value we return becomes the `fulfilled` action payload
     return response.data;
   }
 );
@@ -44,7 +41,6 @@ export const getPosts = createAsyncThunk(
 export const posterSlice = createSlice({
   name: 'poster',
   initialState,
-  // The `reducers` field lets us define reducers and generate associated actions
   reducers: {
     
   },

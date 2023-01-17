@@ -10,10 +10,8 @@ export interface IndexProps {
 export interface SingleProps {
     post: Post
     isLoading: boolean
-    isCommentLoading?: boolean
-    comments?: Array<Comment>
     config?: {
-        comment_support?: boolean
+        supports?: Array<string>
     }
 }
 

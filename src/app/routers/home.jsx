@@ -9,7 +9,6 @@ import { useAppDispatch } from "../hooks";
 
 export default function HomePage() {
   const dispatch = useAppDispatch();
-
   const config = useSelector(selectConfig);
   const posts = useSelector(selectAllPosts);
 
@@ -19,8 +18,8 @@ export default function HomePage() {
 
   return <Layout>
     <Helmet>
-      <title>{config.general.title}</title>
-      <meta name="description" content={config.general.description} />
+      <title>{config.general?.title}</title>
+      <meta name="description" content={config.general?.description} />
     </Helmet>
 
     <IndexTemplate posts={posts} />
