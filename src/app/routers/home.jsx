@@ -3,6 +3,7 @@ import { Helmet } from "react-helmet-async";
 import { useSelector } from "react-redux";
 import IndexTemplate from "../../views";
 import Layout from "../components/Layout";
+import Loading from "../components/Loading";
 import { selectConfig } from "../features/config/configSlice";
 import { getPosts, selectAllPosts } from "../features/poster/posterSlice";
 import { useAppDispatch } from "../hooks";
@@ -14,7 +15,9 @@ export default function HomePage() {
 
   useEffect(() => {
     dispatch(getPosts({type: 'posts'}));
-  }, [dispatch])
+  }, [dispatch]);
+
+  if (!posts) return <Loading />
 
   return <Layout>
     <Helmet>

@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { fetchThemeConfig } from './configAPI';
+import { fetchMenu, fetchThemeConfig } from './configAPI';
 import { RootState } from '../../store';
 
 export interface ConfigOptions {
@@ -15,22 +15,27 @@ export interface PostType {
   description?: string;
 }
 
+export interface Permalink {
+  label: string
+  base: string 
+  key: string
+  post_type?: string
+}
+
 export interface ConfigState {
-  config: {
-    general: {
+  config?: {
+    general?: {
       title?: string;
       description?: string;
     },
     post_types?: Array<{[key: string]: PostType}>
+    permalinks?: Array<{[key: string]: Permalink}>
   };
   status: string;
   error?: string;
 }
 
 const initialState: ConfigState = {
-  config: {
-    general: {}
-  },
   status: 'idle',
 };
 
@@ -38,6 +43,15 @@ export const getThemeConfig = createAsyncThunk(
   'config/fetchThemeConfig',
   async () => {
     const response = await fetchThemeConfig();
+    // The value we return becomes the `fulfilled` action payload
+    return response.data;
+  }
+);
+
+export const getMenu = createAsyncThunk(
+  'config/fetchMenu',
+  async (location: string) => {
+    const response = await fetchMenu(location);
     // The value we return becomes the `fulfilled` action payload
     return response.data;
   }
