@@ -1,5 +1,5 @@
 import { HelmetProvider } from 'react-helmet-async';
-import {createBrowserRouter, Route, Routes} from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import axios from 'axios';
 import { useEffect } from 'react';
 import { getThemeConfig } from './app/features/config/configSlice';
@@ -38,9 +38,9 @@ function App() {
   return (
     <HelmetProvider>
       <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/:type" element={<PostPage />} />
-        <Route path="/:type/:slug" element={<PostPage />} />
+        <Route path="/" element={<HomePage />} errorElement={<ErrorPage />} />
+        <Route path="/:type" element={<PostPage />} errorElement={<ErrorPage />} />
+        <Route path="/:type/:slug" element={<PostPage />} errorElement={<ErrorPage />} />
       </Routes>
   </HelmetProvider>
   );

@@ -22,14 +22,14 @@ export default function PostPage() {
 
     const permalink: any = config?.permalinks ? config?.permalinks[type] : null;
     postTypeConfig = config?.post_types ? config?.post_types[permalink?.post_type] : null;
-    console.log(postTypeConfig);
+    console.log(type, postTypeConfig, config);
     
     if (!postTypeConfig || !slug) {
       return;
     }
 
     getPostBySlug(postTypeConfig.type, slug).then((res) => setPost(res.data));
-  }, []);
+  }, [config]);
 
   if (!config || !post) return <Loading />
   
