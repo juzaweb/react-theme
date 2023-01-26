@@ -14,7 +14,20 @@ module.exports = {
       {
         test: /\.js$/,
         use: 'babel-loader'
+      },
+      {
+        test: /\.(ts|tsx)?$/,
+        use: [
+          {
+            loader: 'ts-loader',
+          }
+        ]
       }
     ]
-  }
+  },
+  resolve: {
+        
+    // file extensions
+    extensions: [ '.js', '.tsx', '.scss' ],
+  },
 };

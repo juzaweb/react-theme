@@ -7,6 +7,8 @@ import axios from 'axios';
 import { useEffect } from 'react';
 import { getThemeConfig } from './app/features/config/configSlice';
 import { useAppDispatch } from './app/hooks';
+import { Provider } from 'react-redux';
+import { store } from './app/store';
 
 axios.defaults.baseURL = "http://cms.local/api";
 
@@ -35,9 +37,11 @@ function App() {
     dispatch(getThemeConfig());
   }, [dispatch])
 
-  return <HelmetProvider>
-    <RouterProvider router={router} />
-  </HelmetProvider>;
+  return <Provider store={store}>
+    <HelmetProvider>
+      <RouterProvider router={router} />
+    </HelmetProvider>
+  </Provider>;
 }
 
 export default App;
