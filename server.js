@@ -10,32 +10,32 @@ import { StaticRouter } from "react-router-dom/server";
 const PORT = process.env.PORT || 3006;
 const app = express();
 
+app.get( /\.(js|css|map|ico|json|png|jpg|jpeg)$/, express.static(path.resolve(__dirname, '../build' ) ) );
+
 app.get('*', (req, res) => {
+  const context = {};
   const app = ReactDOMServer.renderToString(
     <Provider store={store}>
-      <StaticRouter location={req.url}>
-        <App />
+      <StaticRouter location={req.url} context={context}>
+          <App />
       </StaticRouter>
     </Provider>
   );
   
-  const indexFile = path.resolve('./build/index.html');
+  const indexFile = path.resolve(__dirname, '../build/index.html');
 
-  fs.readFile(indexFile, 'utf8', (err, data) => {
-    if (err) {
-      console.error('Something went wrong:', err);
-      return res.status(500).send('Oops, better luck next time!');
-    }
-
-    return res.send(
-      data.replace('<div id="root"></div>', `<div id="root">${app}</div>`)
-    );
+  let indexHTML = fs.readFileSync( indexFile, {
+    encoding: 'utf8',
   });
-});
 
-app.use(express.static('./build'));
+  res.contentType( 'text/html' );
+  res.status( 200 );
+
+  return res.send(
+    indexHTML.replace('<div id="root"></div>', `<div id="root">${app}</div>`)
+  );
+});
 
 app.listen(PORT, () => {
   console.log(`Server is listening on port ${PORT}`);
 });
-  

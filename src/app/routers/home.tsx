@@ -17,12 +17,14 @@ export default function HomePage() {
 
   if (!posts) return <Loading />
   
-  return <Layout>
-    <Helmet>
-      <title>{config?.general?.title}</title>
-      <meta name="description" content={config?.general?.description} />
-    </Helmet>
+  return <>asdadasd</>
 
-    <IndexTemplate posts={posts} isLoading={false} />
-  </Layout>;
+  // return <Layout>
+  //   <Helmet>
+  //     <title>{config?.general?.title}</title>
+  //     <meta name="description" content={config?.general?.description} />
+  //   </Helmet>
+
+  //   <IndexTemplate posts={posts} isLoading={false} />
+  // </Layout>;
 }
