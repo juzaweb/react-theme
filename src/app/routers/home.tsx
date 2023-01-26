@@ -19,10 +19,10 @@ export default function HomePage() {
   
   return <Layout>
     <Helmet>
-      <title>{config.general?.title}</title>
-      <meta name="description" content={config.general?.description} />
+      <title>{config?.general?.title}</title>
+      <meta name="description" content={config?.general?.description} />
     </Helmet>
 
-    <IndexTemplate posts={posts} />
+    <IndexTemplate posts={posts} isLoading={false} />
   </Layout>;
 }

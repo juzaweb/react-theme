@@ -10,6 +10,7 @@ export interface ConfigOptions {
 export interface PostType {
   label: string;
   key: string;
+  type: string;
   singular: string;
   supports?: Array<string>;
   description?: string;
