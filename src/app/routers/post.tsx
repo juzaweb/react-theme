@@ -6,36 +6,39 @@ import SingleTemplate from "../../views/template-parts/single";
 import Layout from "../components/Layout";
 import Loading from "../components/Loading";
 import { getPostBySlug } from "../context/DataHelper";
-import { selectConfig } from "../features/config/configSlice";
+import { PostType, selectConfig } from "../features/config/configSlice";
+import { Post } from '../context/PostContext';
 
 export default function PostPage() {
-  // const config = useSelector(selectConfig);
-  // const { type, slug } = useParams();
-  // const [post, setPost] = useState(null);
+  const config = useSelector(selectConfig);
+  const { type, slug } = useParams();
+  const [post, setPost] = useState<Post|null>(null);
+  let postTypeConfig: PostType | null = null;
 
-  // if (!config?.post_types || !type) {
-  //   return;
-  // }
+  useEffect(() => {
+    if (!type) {
+      return;
+    }
 
-  // const permalink: any = config?.permalinks ? config?.permalinks[type] : null;
-  // const postTypeConfig: any = config?.post_types[permalink?.post_type];
+    const permalink: any = config?.permalinks ? config?.permalinks[type] : null;
+    postTypeConfig = config?.post_types ? config?.post_types[permalink?.post_type] : null;
+    console.log(postTypeConfig);
+    
+    if (!postTypeConfig || !slug) {
+      return;
+    }
 
-  // useEffect(() => {
-  //   if (!postTypeConfig || !slug) {
-  //     return;
-  //   }
+    getPostBySlug(postTypeConfig.type, slug).then((res) => setPost(res.data));
+  }, []);
 
-  //   getPostBySlug(postTypeConfig.type, slug).then((response) => setPost(response.data));
-  // }, [postTypeConfig]);
-
-  // if (!config || !post) return <Loading />
+  if (!config || !post) return <Loading />
   
   return <Layout>
-    {/* <Helmet>
+    <Helmet>
       <title>{post.title}</title>
       <meta name="description" content={post.description} />
     </Helmet>
 
-    <SingleTemplate post={post} config={postTypeConfig} /> */}
+    <SingleTemplate post={post} config={postTypeConfig} />
   </Layout>;
 }

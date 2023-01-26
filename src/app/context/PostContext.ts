@@ -13,7 +13,7 @@ export type PostMeta = {
     meta_value?: string
 }
 
-export type Post = {
+export interface Post {
     id: string
     title: string
     slug: string

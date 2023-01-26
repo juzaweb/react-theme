@@ -1,18 +1,15 @@
+import { PostType } from "../features/config/configSlice"
 import { Post, Comment } from "./PostContext"
 
 export interface IndexProps {
     posts: {
         data?: Array<Post>
     }
-    isLoading: boolean
 }
 
 export interface SingleProps {
     post: Post
-    isLoading: boolean
-    config?: {
-        supports?: Array<string>
-    }
+    config?: PostType|null
 }
 
 export interface Page404Props {

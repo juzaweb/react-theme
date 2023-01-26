@@ -29,8 +29,8 @@ export interface ConfigState {
       title?: string;
       description?: string;
     },
-    post_types?: Array<{[key: string]: PostType}>
-    permalinks?: Array<{[key: string]: Permalink}>
+    post_types?: { [key: string]: PostType }
+    permalinks?: { [key: string]: Permalink }
   };
   status: string;
   error?: string;
