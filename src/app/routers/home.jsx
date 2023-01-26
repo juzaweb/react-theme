@@ -1,24 +1,22 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { useSelector } from "react-redux";
 import IndexTemplate from "../../views";
 import Layout from "../components/Layout";
 import Loading from "../components/Loading";
+import { getPosts } from "../context/DataHelper";
 import { selectConfig } from "../features/config/configSlice";
-import { getPosts, selectAllPosts } from "../features/poster/posterSlice";
-import { useAppDispatch } from "../hooks";
 
 export default function HomePage() {
-  const dispatch = useAppDispatch();
   const config = useSelector(selectConfig);
-  const posts = useSelector(selectAllPosts);
+  const [posts, setPosts] = useState(null);
 
   useEffect(() => {
-    dispatch(getPosts({type: 'posts'}));
-  }, [dispatch]);
+    getPosts('posts').then((res) => setPosts(res));
+  }, []);
 
   if (!posts) return <Loading />
-
+  
   return <Layout>
     <Helmet>
       <title>{config.general?.title}</title>

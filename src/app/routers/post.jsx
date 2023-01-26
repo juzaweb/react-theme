@@ -12,14 +12,19 @@ export default function PostPage() {
   const config = useSelector(selectConfig);
   const [post, setPost] = useState(null);
   const { type, slug } = useParams();
+  const postTypeConfig = config?.post_types[config?.permalinks[type].post_type];
 
   useEffect(() => {
-    getPostBySlug('posts', slug).then((response) => setPost(response.data));
-  }, []);
+    if (!postTypeConfig) {
+      return;
+    }
+
+    getPostBySlug(postTypeConfig.type, slug).then((response) => setPost(response.data));
+  }, [postTypeConfig]);
 
   if (!config || !post) return <Loading />
   
-  const postTypeConfig = config?.post_types[config?.permalinks[type].post_type];
+  
   console.log(post);
   return <Layout>
     <Helmet>
