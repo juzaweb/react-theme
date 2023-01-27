@@ -3,7 +3,7 @@ import { SingleProps } from "../../app/context/Props";
 import CommentComponentTemplate from "../components/comments";
 
 const SingleTemplate = (props: SingleProps) => {
-    const { post } = props;
+    const { post, config } = props;
 
     return (
         <>
@@ -28,13 +28,13 @@ const SingleTemplate = (props: SingleProps) => {
                     </div>
                 </div>
 
-                {/* {(props.config?.supports) ? (
+                {(config?.supports?.includes('comment')) ? (
                     <div className="row mt-5">
                         <div className="col-md-12">
-                            <CommentComponentTemplate/>
+                            <CommentComponentTemplate post={post} total={post.total_comment} />
                         </div>
                     </div>
-                ) : ''} */}
+                ) : ''}
                 
             </div>
         </>

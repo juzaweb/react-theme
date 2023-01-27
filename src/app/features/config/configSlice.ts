@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { fetchMenu, fetchThemeConfig } from './configAPI';
+import { fetchThemeConfig } from './configAPI';
 import { RootState } from '../../store';
 
 export interface ConfigOptions {
@@ -44,15 +44,6 @@ export const getThemeConfig = createAsyncThunk(
   'config/fetchThemeConfig',
   async () => {
     const response = await fetchThemeConfig();
-    // The value we return becomes the `fulfilled` action payload
-    return response.data;
-  }
-);
-
-export const getMenu = createAsyncThunk(
-  'config/fetchMenu',
-  async (location: string) => {
-    const response = await fetchMenu(location);
     // The value we return becomes the `fulfilled` action payload
     return response.data;
   }

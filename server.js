@@ -7,22 +7,29 @@ import App from './src/App';
 import { store } from './src/app/store';
 import { StaticRouter } from "react-router-dom/server";
 
+const { matchPath } = require( 'react-router-dom' );
+const routes = require( './server/routes' );
 const PORT = process.env.PORT || 3006;
 const app = express();
 
 app.get( /\.(js|css|map|ico|json|png|jpg|jpeg)$/, express.static(path.resolve(__dirname, '../build' ) ) );
 
-app.get('*', (req, res) => {
-  const context = {};
+app.get('*', async (req, res) => {
+  const matchRoute = routes.find( route => matchPath( req.originalUrl, route ) );
+  const indexFile = path.resolve(__dirname, '../build/index.html');
+
+  let componentData = null;
+  if( typeof matchRoute.fetchData === 'function' ) {
+      componentData = await matchRoute.fetchData();
+  }
+
   const app = ReactDOMServer.renderToString(
     <Provider store={store}>
-      <StaticRouter location={req.url} context={context}>
+      <StaticRouter location={req.url} context={componentData}>
           <App />
       </StaticRouter>
     </Provider>
   );
-  
-  const indexFile = path.resolve(__dirname, '../build/index.html');
 
   let indexHTML = fs.readFileSync( indexFile, {
     encoding: 'utf8',

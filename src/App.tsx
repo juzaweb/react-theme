@@ -7,6 +7,7 @@ import { useAppDispatch } from './app/hooks';
 import ErrorPage from './app/routers/error-page';
 import HomePage from './app/routers/home';
 import PostPage from './app/routers/post';
+import { getMenu } from './app/features/menu/menuSlice';
 
 axios.defaults.baseURL = "http://cms.local/api";
 
@@ -33,6 +34,7 @@ function App() {
 
   useEffect(() => {
     dispatch(getThemeConfig());
+    dispatch(getMenu('primary'));
   }, [dispatch])
 
   return (

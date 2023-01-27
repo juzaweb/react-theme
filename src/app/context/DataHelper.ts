@@ -27,3 +27,12 @@ export async function getPosts(type: string = 'posts', options: object = {}) {
     console.error(error);
   }
 }
+
+export async function getMenu(location: string) {
+  try {
+    const response = await axios.get(`menus/${location}`);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
+}

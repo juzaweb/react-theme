@@ -6,30 +6,29 @@ import SingleTemplate from "../../views/template-parts/single";
 import Layout from "../components/Layout";
 import Loading from "../components/Loading";
 import { getPostBySlug } from "../context/DataHelper";
-import { PostType, selectConfig } from "../features/config/configSlice";
+import { Permalink, PostType, selectConfig } from "../features/config/configSlice";
 import { Post } from '../context/PostContext';
 
 export default function PostPage() {
   const config = useSelector(selectConfig);
   const { type, slug } = useParams();
   const [post, setPost] = useState<Post|null>(null);
-  let postTypeConfig: PostType | null = null;
+  const [permalink, setPermalink] = useState<Permalink|null>(null);
+  const [postTypeConfig, setPostTypeConfig] = useState<PostType|null>(null);
 
   useEffect(() => {
-    if (!type) {
-      return;
+    if (type && config?.permalinks) {
+      setPermalink(config?.permalinks[type]);
     }
 
-    const permalink: any = config?.permalinks ? config?.permalinks[type] : null;
-    postTypeConfig = config?.post_types ? config?.post_types[permalink?.post_type] : null;
-    console.log(type, postTypeConfig, config);
+    if (config?.post_types && permalink?.post_type) {
+      setPostTypeConfig(config?.post_types[permalink.post_type]);
+    }
     
-    if (!postTypeConfig || !slug) {
-      return;
+    if (postTypeConfig && slug) {
+      getPostBySlug(postTypeConfig.type, slug).then((res) => setPost(res.data));
     }
-
-    getPostBySlug(postTypeConfig.type, slug).then((res) => setPost(res.data));
-  }, [config]);
+  }, [config, postTypeConfig, permalink, type, slug]);
 
   if (!config || !post) return <Loading />
   

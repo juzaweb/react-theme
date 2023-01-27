@@ -7,17 +7,19 @@ import Loading from "../components/Loading";
 import { getPosts } from "../context/DataHelper";
 import { selectConfig } from "../features/config/configSlice";
 
+function fetchData() {
+ return getPosts('posts');
+}
+
 export default function HomePage() {
   const config = useSelector(selectConfig);
   const [posts, setPosts] = useState(null);
 
   useEffect(() => {
-    getPosts('posts').then((res) => setPosts(res));
+    fetchData().then((res) => setPosts(res));
   }, []);
 
   if (!posts) return <Loading />
-  
-  //return <>asdadasd</>
 
   return <Layout>
     <Helmet>

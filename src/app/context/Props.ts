@@ -9,7 +9,7 @@ export interface IndexProps {
 
 export interface SingleProps {
     post: Post
-    config?: PostType|null
+    config?: any|null
 }
 
 export interface Page404Props {
@@ -17,8 +17,6 @@ export interface Page404Props {
 }
 
 export interface CommentProps {
-    comments?: Array<Comment>
-    isLoading?: boolean
-    support?: boolean
+    post: Post
     total: Number
 }

@@ -4,8 +4,8 @@ import Footer from './Footer';
 import { ReactNode } from 'react';
 
 // Styles
-//import "bootstrap/dist/css/bootstrap.min.css";
-
+import "bootstrap/dist/css/bootstrap.min.css";
+import 'bootstrap/dist/js/bootstrap.js';
 
 type Props = {
   children?: ReactNode

@@ -1,11 +1,16 @@
+import { useEffect, useState } from "react";
 import { __ } from "../../app/context/Helper";
 import { CommentProps } from "../../app/context/Props";
+import { Comment } from "../../app/context/PostContext";
+import { getPostComments } from "../../app/context/DataHelper";
 
 const CommentComponentTemplate = (props: CommentProps) => {
-    const { total, comments } = props;
-    if (!props.support) {
-        return <></>;
-    }
+    const { total, post } = props;
+    const [comments, setComments] = useState<Array<Comment>>();
+
+    useEffect(() => {
+        getPostComments(post.type, post.slug)
+    }, []);
 
     return (
         <>
