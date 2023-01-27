@@ -6,7 +6,7 @@ const SingleTemplate = (props: SingleProps) => {
     const { post, config } = props;
 
     return (
-        <>
+        <main>
             <div className="container-fluid">
                 <div className="row">
                     <div className="col-md-8">
@@ -37,7 +37,7 @@ const SingleTemplate = (props: SingleProps) => {
                 ) : ''}
                 
             </div>
-        </>
+        </main>
     );
 }
 

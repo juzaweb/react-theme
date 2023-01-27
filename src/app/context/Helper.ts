@@ -21,5 +21,5 @@ export function upload_url(path?: string): string {
       return path;
   }
 
-  return path;
+  return process.env.APP_STORAGE_URL + '/'+ path;
 }

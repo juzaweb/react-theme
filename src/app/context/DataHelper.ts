@@ -28,6 +28,15 @@ export async function getPosts(type: string = 'posts', options: object = {}) {
   }
 }
 
+export async function search(params: object = {}) {
+  try {
+    const response = await axios.get(`search`, { params: params });
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 export async function postComment(
   slug: string, 
   type: string = 'posts',

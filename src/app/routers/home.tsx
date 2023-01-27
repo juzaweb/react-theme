@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import ReactPaginate from "react-paginate";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import Layout from "../components/Layout";
 import { getPosts } from "../context/DataHelper";
 import { upload_url, __ } from "../context/Helper";
@@ -16,25 +16,26 @@ function fetchData(params: {limit?: number, page: number}) {
 
 export default function HomePage() {
   const config = useSelector(selectConfig);
+  const { page } = useParams();
   const [posts, setPosts] = useState<{
     data?: Array<Post>,
     meta?: {
         last_page?: number
-        links?: Array<any>
         per_page?: number
         total?: number
     }
   }>();
 
-  const [currentPage, setCurrentPage] = useState<number>(1);
+  const navigate = useNavigate();
 
-  const paginate = ({ selected }: any) => {
-    setCurrentPage(selected + 1);
+  const paginate = ({ selected }: { selected: number }) => {
+    navigate('/page/'+ (selected + 1));
+    setTimeout(() => window.scrollTo(0, 0), 300);
   };
 
   useEffect(() => {
-    fetchData({page: currentPage}).then((res) => setPosts(res));
-  }, [currentPage]);
+    fetchData({page: Number(page || 1)}).then((res) => setPosts(res));
+  }, [page]);
 
   return <Layout>
     <Helmet>
@@ -84,7 +85,7 @@ export default function HomePage() {
                 <p className="lead">{item.description}</p>
                 <p><Link className="btn btn-secondary" to={item.url}>{__('View details')} &raquo;</Link></p>
               </div>
-              <div className={"col-md-5"+ (index % 2 != 0 ? ' order-md-1': '')}>
+              <div className={"col-md-5"+ (index % 2 !== 0 ? ' order-md-1': '')}>
                   <img src={upload_url(item.thumbnail)} alt={item.title} className="w-100" />
               </div>
             </div>
@@ -92,19 +93,24 @@ export default function HomePage() {
           </React.Fragment>
         )) : ('')}
 
-          {posts ? 
-          <ReactPaginate
-                onPageChange={paginate}
-                pageCount={posts.meta?.last_page || 1}
-                previousLabel={'Prev'}
-                nextLabel={'Next'}
-                containerClassName={'pagination'}
-                pageClassName={'page-item'}
-                pageLinkClassName={'page-link'}
-                previousLinkClassName={'page-link'}
-                nextLinkClassName={'page-link'}
-                activeLinkClassName={'active'}
-          />
+          {posts && (posts.meta?.last_page || 0) > 1 ? 
+            <ReactPaginate
+                  onPageChange={paginate}
+                  pageCount={posts.meta?.last_page || 1}
+                  previousLabel={'Prev'}
+                  nextLabel={'Next'}
+                  containerClassName={'pagination'}
+                  pageClassName={'page-item'}
+                  pageLinkClassName={'page-link'}
+                  previousLinkClassName={'page-link'}
+                  nextLinkClassName={'page-link'}
+                  activeLinkClassName={'active'}
+                  hrefBuilder={(page, pageCount, selected) =>
+                    page >= 1 && page <= pageCount ? `/page/${page}` : '#'
+                  }
+                  hrefAllControls={true}
+                  forcePage={(Number(page) || 1) - 1}
+            />
           : ''}
           
 
