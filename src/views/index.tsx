@@ -1,10 +1,16 @@
 import { IndexProps } from "../app/context/Props";
 import { Link } from "react-router-dom";
 import { upload_url, __ } from "../app/context/Helper";
-import React from "react";
+import React, { useState } from "react";
+import ReactPaginate from "react-paginate";
 
 const IndexTemplate = (props: IndexProps) => {
     const { posts } = props;
+    const [currentPage, setCurrentPage] = useState(1);
+
+    const paginate = ({ selected }: any) => {
+      setCurrentPage(selected + 1);
+    };
     
     return (
       <>
@@ -57,6 +63,19 @@ const IndexTemplate = (props: IndexProps) => {
                 <hr className="featurette-divider" />
               </React.Fragment>
             ))}
+
+              <ReactPaginate
+                  onPageChange={paginate}
+                  pageCount={posts.meta?.last_page || 1}
+                  previousLabel={'Prev'}
+                  nextLabel={'Next'}
+                  containerClassName={'pagination'}
+                  pageClassName={'page-item'}
+                  pageLinkClassName={'page-link'}
+                  previousLinkClassName={'page-link'}
+                  nextLinkClassName={'page-link'}
+                  activeLinkClassName={'active'}
+            />
 
           </div>
         </main>

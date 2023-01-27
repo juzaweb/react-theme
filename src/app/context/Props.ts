@@ -3,7 +3,13 @@ import { Post, Comment } from "./PostContext"
 
 export interface IndexProps {
     posts: {
-        data?: Array<Post>
+        data?: Array<Post>,
+        meta?: {
+            last_page?: number
+            links?: Array<any>
+            per_page?: number
+            total?: number
+        }
     }
 }
 
