@@ -28,11 +28,19 @@ export async function getPosts(type: string = 'posts', options: object = {}) {
   }
 }
 
-export async function getMenu(location: string) {
+export async function postComment(
+  slug: string, 
+  type: string = 'posts',
+  data: {}
+) {
   try {
-    const response = await axios.get(`menus/${location}`);
-    return response.data;
-  } catch (error) {
+    const response = await axios.post(
+      `post-type/${type}/${slug}/comments`,
+      data
+    );
+    return response;
+  } catch (error: any) {
     console.error(error);
+    return error.response;
   }
 }
