@@ -5,6 +5,7 @@ export type Taxonomy = {
     taxonomy: string
     thumbnail: string
     total_post: string
+    url: string
     level: Number
 }
 

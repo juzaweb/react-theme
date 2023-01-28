@@ -1,3 +1,5 @@
+import { Post, Taxonomy } from "./PostContext";
+
 function is_url(url: string): boolean {
   let data;
   try {
@@ -30,4 +32,8 @@ export function is_auth(): boolean {
 
 export function auth(): boolean {
   return !!localStorage.getItem('access_token');
+}
+
+export function find_category_post(post: Post): Taxonomy|undefined {
+  return post.taxonomies?.find((tax) => tax.taxonomy === 'categories', 0);
 }
