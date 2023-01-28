@@ -4,7 +4,7 @@ import { MenuItem, selectMenu } from "../app/features/menu/menuSlice";
 import { useLocation } from 'react-router-dom';
 import { selectConfig } from "../app/features/config/configSlice";
 import { upload_url } from "../app/context/Helper";
-import { getPosts, search } from "../app/context/DataHelper";
+import { getPosts } from "../app/context/DataHelper";
 import { useState } from "react";
 import { Post } from "../app/context/PostContext";
 
