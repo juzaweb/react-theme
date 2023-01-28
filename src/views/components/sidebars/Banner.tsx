@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import { upload_url } from "../../../app/context/Helper";
 
 export default function Banner(props: {data: any}) {
