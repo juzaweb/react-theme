@@ -10,13 +10,17 @@ import { Post } from "../app/context/PostContext";
 
 const TemplateHeader = () => {
     const config = useSelector(selectConfig);
-    const menu = useSelector(selectMenu)[1];
+    const menu = useSelector(selectMenu)['primary'];
     const [suggests, setSuggests] = useState<Array<Post>>();
     const location = useLocation();
 
     function handleSearchOnChange(e: React.ChangeEvent<HTMLInputElement>) {
-        //search({q: e.target.value}).then((res) => setSuggests(res.data));
-        getPosts('posts', {q: e.target.value, limit: 5}).then((res) => setSuggests(res.data));
+        let value = e.target.value;
+        if (value) {
+            getPosts('posts', {q: e.target.value, limit: 5}).then((res) => setSuggests(res.data));
+        } else {
+            setSuggests(undefined);
+        }
     }
 
     return (

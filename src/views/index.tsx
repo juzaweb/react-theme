@@ -10,7 +10,7 @@ const IndexTemplate = (props: IndexProps) => {
 
     const paginate = ({ selected }: any) => {
       setCurrentPage(selected + 1);
-    };
+   };
     
     return (
       <>

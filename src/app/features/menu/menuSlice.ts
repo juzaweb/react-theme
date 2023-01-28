@@ -12,6 +12,7 @@ export interface MenuItem {
 export interface Menu {
   id: string
   name: string
+  location?: string
   items: Array<MenuItem>
 }
 
@@ -51,7 +52,7 @@ export const menuSlice = createSlice({
       })
       .addCase(getMenu.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        state.menus[action.payload.data.id] = action.payload.data;
+        state.menus[action.payload.data.location] = action.payload.data;
       })
       .addCase(getMenu.rejected, (state, action) => {
         state.status = 'failed';
