@@ -1,3 +1,4 @@
+import DynamicSidebar from "../../app/components/DynamicSidebar";
 import { upload_url } from "../../app/context/Helper";
 import { SingleProps } from "../../app/context/Props";
 import CommentComponentTemplate from "../components/comments";
@@ -24,7 +25,7 @@ const SingleTemplate = (props: SingleProps) => {
                     </div>
 
                     <div className="col-md-4">
-
+                        <DynamicSidebar name="sidebar" />
                     </div>
                 </div>
 

@@ -1,5 +1,6 @@
-import { PostType } from "../features/config/configSlice"
-import { Post, Comment } from "./PostContext"
+import { Post } from "./PostContext"
+
+export interface formDataType {[key:string]: FormDataEntryValue}
 
 export interface IndexProps {
     posts: {

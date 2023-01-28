@@ -37,6 +37,15 @@ export async function search(params: object = {}) {
   }
 }
 
+export async function getSidebar(name: string) {
+  try {
+    const response = await axios.get(`sidebar/${name}`);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 export async function postComment(
   slug: string, 
   type: string = 'posts',

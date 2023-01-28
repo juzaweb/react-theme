@@ -13,6 +13,7 @@ import { getMenu } from './app/features/menu/menuSlice';
 import "bootstrap/dist/css/bootstrap.min.css";
 import 'bootstrap/dist/js/bootstrap.bundle';
 import { useSelector } from 'react-redux';
+import Page from './app/routers/page';
 
 axios.defaults.baseURL = "http://cms.local/api";
 
@@ -55,7 +56,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} errorElement={<ErrorPage />} />
         <Route path="/page/:page" element={<HomePage />} errorElement={<ErrorPage />} />
-        <Route path="/:type" element={<PostPage />} errorElement={<ErrorPage />} />
+        <Route path="/:type" element={<Page />} errorElement={<ErrorPage />} />
         <Route path="/:type/page/:page" element={<PostPage />} errorElement={<ErrorPage />} />
         <Route path="/:type/:slug" element={<PostPage />} errorElement={<ErrorPage />} />
       </Routes>

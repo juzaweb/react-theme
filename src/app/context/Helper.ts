@@ -23,3 +23,11 @@ export function upload_url(path?: string): string {
 
   return process.env.APP_STORAGE_URL + '/'+ path;
 }
+
+export function is_auth(): boolean {
+  return !!localStorage.getItem('access_token');
+}
+
+export function auth(): boolean {
+  return !!localStorage.getItem('access_token');
+}

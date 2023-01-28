@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react";
 import { __ } from "../../app/context/Helper";
-import { CommentProps } from "../../app/context/Props";
+import { CommentProps, formDataType } from "../../app/context/Props";
 import { Comment } from "../../app/context/PostContext";
 import { getPostComments, postComment } from "../../app/context/DataHelper";
-
-interface formDataType {[key:string]: FormDataEntryValue}
 
 const CommentComponentTemplate = (props: CommentProps) => {
     const { total, post } = props;
@@ -13,7 +11,7 @@ const CommentComponentTemplate = (props: CommentProps) => {
 
     function showMessage(res: any, status: boolean = true) {
         setMsg({message: res.message, status: status});
-        setTimeout(() => setMsg({message: '', status: status}), 1000);
+        setTimeout(() => setMsg({message: '', status: status}), 5000);
     }
 
     function handleSubmitComment(event: React.FormEvent<HTMLFormElement>) {
